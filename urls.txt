@@ -1,0 +1,5 @@
+curl -X POST pplication/json" -d '{ "titulo":"novo2", "preco":1500, "descricao":"descricao do livro 2" }' 'http://localhost:3000/produtos'
+
+curl -H "Accept: text/html" http://localhost:3000/produtos
+
+curl -H "Accept: application/json" http://localhost:3000/produtos

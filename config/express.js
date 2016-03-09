@@ -11,7 +11,8 @@ module.exports = function() {
 
 	app.use(express.static('./public'));
 
-	app.use(bodyParser());
+	app.use(bodyParser.urlencoded({extended: true}));
+	app.use(bodyParser.json());
 
 	load('infra', { cwd: 'app'})
 		.then('routes').into(app);
