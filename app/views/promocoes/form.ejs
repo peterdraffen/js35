@@ -10,7 +10,7 @@
         <div class ="container min-container">
             <h2 class="basic-title">Add</h2>
             
-            <!-- FORM DE PRODUTOS -->
+            <!-- FORM DE PROMOCOES -->
             <% if (locals.validationErrors) { %>
                 <ul style="list-unstyled">
                     <% for (var i = 0; i < locals.validationErrors.length; i++) { %>
@@ -18,26 +18,12 @@
                     <% }; %>
                 </ul>
             <% }; %>
-            <form action="/produtos" method="post" class="well" role="form">
+            <form action="/promocoes" method="post" class="well" role="form">
                 <div class="form-group">
-                    <label for="titulo">Titulo</label>
+                    <label for="titulo">Descricao</label>
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked"></i></span>
-                        <input type="text" name="titulo" placeholder="titulo do livro" value="<%=produto.titulo%>"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="preco">Preço</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked"></i></span>
-                        <input type="text" name="preco" placeholder="valor do livro" value="<%=produto.preco%>"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label for="descricao">Descricao</label>
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-unchecked"></i></span>
-                        <textarea name="descricao"><%=produto.descricao%></textarea>
+                        <input type="text" name="descricao" placeholder="descricao da promocao" value="<%=promocao.descricao%>"/>
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Gravar</button>

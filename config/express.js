@@ -1,8 +1,9 @@
 module.exports = function() {
 
 	var express = require('express');
-	var load = require('express-load');
+	var load = require('consign');
 	var bodyParser = require('body-parser');
+	var validator = require('express-validator');
 
 	var app = express();
 
@@ -13,9 +14,13 @@ module.exports = function() {
 
 	app.use(bodyParser.urlencoded({extended: true}));
 	app.use(bodyParser.json());
+	app.use(validator());
 
-	load('infra', { cwd: 'app'})
-		.then('routes').into(app);
+	load({cwd: 'app'})
+		.include('infra')
+		.then('controllers')
+		.then('routes')
+		.into(app);
 
 
 	return app;
