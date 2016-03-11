@@ -46,7 +46,8 @@ module.exports = function(app) {
 		var dao = new app.infra.PromocaoDAO(connection);
 
 		dao.salvar(promocao, function() {
-			response.render('promocoes/salvo');
+			app.get('io').emit('nova promocao', promocao);
+			response.redirect('promocoes');
 		});
 
 	};

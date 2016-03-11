@@ -11,6 +11,14 @@
             <h2 class="basic-title">Add</h2>
             
             <!-- FORM DE PRODUTOS -->
+            <%
+                var metodo
+                if (produto.id) {
+                    metodo = 'PUT';
+                } else {
+                    metodo = 'POST';
+                }
+            %>
             <% if (locals.validationErrors) { %>
                 <ul style="list-unstyled">
                     <% for (var i = 0; i < locals.validationErrors.length; i++) { %>
@@ -18,7 +26,9 @@
                     <% }; %>
                 </ul>
             <% }; %>
-            <form action="/produtos" method="post" class="well" role="form">
+            <form action="/produtos" method="POST" class="well" role="form">
+                <input type="hidden" name="_method" value="<%= metodo %>"/>
+                <input type="hidden" name="id" value="<%=produto.id%>"/>
                 <div class="form-group">
                     <label for="titulo">Titulo</label>
                     <div class="input-group">

@@ -6,6 +6,10 @@ module.exports = function(app) {
 
 	app.post('/produtos',  controller.salva);
 
+	app.put('/produtos',  controller.atualiza);
+
 	app.get('/produtos/form', controller.obterFormulario);
+
+	app.get('/produtos/form/:id', controller.obterPorId);
 
 };
