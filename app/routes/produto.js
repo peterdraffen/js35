@@ -1,10 +1,12 @@
+var wrap = require('co-express');
+
 module.exports = function(app) {
 
 	var controller = app.controllers.produto;
 
-	app.get('/produtos', controller.lista);
+	app.get('/produtos', wrap(controller.lista));
 
-	app.post('/produtos',  controller.salva);
+	app.post('/produtos', wrap(controller.salva));
 
 	app.put('/produtos',  controller.atualiza);
 

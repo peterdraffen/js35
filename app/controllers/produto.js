@@ -2,12 +2,13 @@ module.exports = function(app) {
 
 	var controller = {};
 
-	controller.lista = function(request, response) {
+	controller.lista = function *(request, response) {
 		var connection = app.infra.connectionFactory();
 
 		var dao = new app.infra.ProdutoDAO(connection);
 
-		dao.listar(function(erro, produtos) {
+		try {
+			var produtos = yield dao.listar();
 			response.format({
 				html: function() {
 					response.render('produtos/lista', {
@@ -18,12 +19,14 @@ module.exports = function(app) {
 					response.json(produtos);					
 				}
 			});
-		});
+		} catch (err) {
+			return console.log(err);
+		}
 
 		connection.end();
 	};
 
-	controller.salva = function(request, response) {
+	controller.salva = function *(request, response) {
 		var produto = request.body;
 
 		if (!validaFormulario(produto, request, response)) {
@@ -33,9 +36,12 @@ module.exports = function(app) {
 		var connection = app.infra.connectionFactory();
 		var dao = new app.infra.ProdutoDAO(connection);
 
-		dao.salvar(produto, function() {
+		try {
+			yield dao.salvar(produto);
 			response.render('produtos/salvo');
-		});
+		} catch (err) {
+			return console.log(err);
+		}
 	};
 
 	controller.atualiza = function(request, response) {

@@ -10,12 +10,30 @@ ProdutoDAO.prototype.atualiza = function(produto, callback) {
 	});
 };
 
-ProdutoDAO.prototype.listar = function(callback) {
-	this.connection.query('SELECT * FROM livros', callback);
+ProdutoDAO.prototype.listar = function() {
+	var that = this;
+	return new Promise(function(resolve, reject) {
+		that.connection.query('SELECT * FROM livros', function(err, produtos) {
+			if (err) {
+				reject('Não foi possível listar o produto.');
+			} else {
+				resolve(produtos);
+			}
+		});
+	});
 };
 
-ProdutoDAO.prototype.salvar = function(produto, callback) {
-	this.connection.query('INSERT INTO livros SET ?', produto, callback);
+ProdutoDAO.prototype.salvar = function(produto) {
+	var that = this;
+	return new Promise(function(resolve, reject) {
+		that.connection.query('INSERT INTO livros SET ?', produto, function(err) {
+			if (err) {
+				reject('Não foi possível salvar o produto.');
+			} else {
+				resolve();
+			}
+		});
+	});
 };
 
 function ProdutoDAO(connection) {
